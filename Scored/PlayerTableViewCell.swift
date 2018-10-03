@@ -40,6 +40,7 @@ class PlayerTableViewCell: UITableViewCell {
     }
 
     @IBAction func updateScore(_ sender: UIStepper) {
+        // should use separate buttons, stepper does not store score data correctly
         player?.score = Int32(sender.value)
         delegate?.didUpdateScore()
     }

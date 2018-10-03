@@ -8,8 +8,8 @@
 
 import UIKit
 
-class GameTableViewController: UITableViewController, ScoreboardDelegate, PlayerCellDelegate {
-    private var players = [Player]()
+class GameTableViewController: UITableViewController, PlayerCellDelegate, ScoreboardDelegate {
+    var gameProvider: GameProvider?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class GameTableViewController: UITableViewController, ScoreboardDelegate, Player
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // make number of rows equal number of players
-        return players.count
+        return gameProvider?.game?.players.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,25 +43,37 @@ class GameTableViewController: UITableViewController, ScoreboardDelegate, Player
         }
 
         // fetches appropriate player for cell
-        cell.player = players[indexPath.row]
+        cell.player = gameProvider?.game?.players[indexPath.row]
         cell.delegate = self
         
         return cell
-    }
-
-    // MARK: - ScoreboadDelegate
-    func add(_ player: Player) {
-        players.append(player)
-        tableView.reloadData()
     }
     
     // MARK: - PlayerCellDelegate
     
     func didUpdateScore() {
-        players.sort() {$0.score > $1.score }
+        gameProvider?.game?.players.sort() {$0.score > $1.score }
         tableView.reloadData()
     }
-
+    
+    // MARK: - ScoreboardDelegate
+    
+    func updateGame() {
+        tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            // remove the item from the data model
+            gameProvider?.game?.players.remove(at: indexPath.row)
+            // delete the table view row
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+  
+   
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

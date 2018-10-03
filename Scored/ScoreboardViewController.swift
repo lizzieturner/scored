@@ -8,16 +8,26 @@
 
 import UIKit
 
-protocol ScoreboardDelegate {
-    func add(_ player: Player)
+protocol GameProvider {
+    var game: Game? { get }
 }
 
-class ScoreboardViewController: UIViewController, NewPlayerDelegate {
-    
-    private var delegate: ScoreboardDelegate?
+protocol ScoreboardDelegate {
+    func updateGame()
+}
 
+class ScoreboardViewController: UIViewController, NewPlayerDelegate, GameProvider {
+    var game: Game?
+    var delegate: ScoreboardDelegate?
+
+    @IBOutlet weak var gameNameTextField: UITextField!
+    @IBOutlet weak var gameIDTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.gameNameTextField.text = game?.name
+        self.gameIDTextField.text = game?.id
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,7 +38,9 @@ class ScoreboardViewController: UIViewController, NewPlayerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "embedTableView" {
-            self.delegate = segue.destination as! GameTableViewController
+            let gameTableViewController = segue.destination as! GameTableViewController
+            gameTableViewController.gameProvider = self
+            delegate = gameTableViewController
         } else if segue.identifier == "addNewPlayer" {
             let newPlayerViewController = segue.destination as! NewPlayerViewController
             newPlayerViewController.delegate = self
@@ -36,8 +48,18 @@ class ScoreboardViewController: UIViewController, NewPlayerDelegate {
     }
     
     func didCreatePlayer(_ player: Player) {
-        self.delegate?.add(player)
+        game?.players.append(player)
+        delegate?.updateGame()
     }
+    
+    
+    @IBAction func resetScores(_ sender: Any) {
+        for player in (game?.players)! {
+            player.score = 0
+        }
+        delegate?.updateGame()
+    }
+    
 /*
      // old add player functionality
     @IBAction func addNewPlayer(_ sender: Any) {

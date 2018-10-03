@@ -17,6 +17,8 @@
 		8FB0EB0021633344005F1E88 /* Scored Logo-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB0EAFF21633344005F1E88 /* Scored Logo-2.png */; };
 		8FB0EB0521634107005F1E88 /* GameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0EB0421634107005F1E88 /* GameTableViewController.swift */; };
 		8FB0EB07216472A7005F1E88 /* NewPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0EB06216472A7005F1E88 /* NewPlayerViewController.swift */; };
+		8FB0EB0921648427005F1E88 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0EB0821648427005F1E88 /* LaunchScreenViewController.swift */; };
+		8FB0EB0F21648725005F1E88 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0EB0E21648725005F1E88 /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		8FB0EB012163338A005F1E88 /* Scored Logo.psd */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Scored Logo.psd"; path = "../../../.Trash/Scored Logo.psd"; sourceTree = "<group>"; };
 		8FB0EB0421634107005F1E88 /* GameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewController.swift; sourceTree = "<group>"; };
 		8FB0EB06216472A7005F1E88 /* NewPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerViewController.swift; sourceTree = "<group>"; };
+		8FB0EB0821648427005F1E88 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		8FB0EB0E21648725005F1E88 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,11 +90,13 @@
 		8F724AE5215ADC78009D5495 /* Scored */ = {
 			isa = PBXGroup;
 			children = (
+				8FB0EB0E21648725005F1E88 /* Game.swift */,
 				8FB0EAFB21632738005F1E88 /* Player.swift */,
 				8FB0EAF921631DFC005F1E88 /* ScoreboardViewController.swift */,
 				8FB0EB0421634107005F1E88 /* GameTableViewController.swift */,
 				8FB0EAFD21632DD7005F1E88 /* PlayerTableViewCell.swift */,
 				8FB0EB06216472A7005F1E88 /* NewPlayerViewController.swift */,
+				8FB0EB0821648427005F1E88 /* LaunchScreenViewController.swift */,
 				8F724AE6215ADC78009D5495 /* AppDelegate.swift */,
 				8FB0EAFF21633344005F1E88 /* Scored Logo-2.png */,
 				8F724AEA215ADC78009D5495 /* Main.storyboard */,
@@ -217,6 +223,8 @@
 				8FB0EB0521634107005F1E88 /* GameTableViewController.swift in Sources */,
 				8FB0EAFA21631DFC005F1E88 /* ScoreboardViewController.swift in Sources */,
 				8F724AE7215ADC78009D5495 /* AppDelegate.swift in Sources */,
+				8FB0EB0921648427005F1E88 /* LaunchScreenViewController.swift in Sources */,
+				8FB0EB0F21648725005F1E88 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

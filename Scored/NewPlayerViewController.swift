@@ -19,6 +19,7 @@ class NewPlayerViewController: UIViewController {
     
     @IBOutlet weak var playerName: UITextField!
     @IBOutlet weak var startingScore: UITextField!
+    weak var colorButton: UIButton?
     var playerColor = UIColor.gray
     
     
@@ -34,6 +35,8 @@ class NewPlayerViewController: UIViewController {
         numberToolbar.sizeToFit()
         
         startingScore.inputAccessoryView = numberToolbar
+        
+        playerName.becomeFirstResponder()
     }
     
    @IBAction func dismissKeyboard(_ sender: Any) {
@@ -47,6 +50,15 @@ class NewPlayerViewController: UIViewController {
     
     @IBAction func setColor(_ sender: UIButton) {
         playerColor = sender.backgroundColor!
+        
+        if let button = colorButton {
+            button.layer.borderColor = UIColor.clear.cgColor
+            button.layer.borderWidth = 0
+        }
+        
+        sender.layer.borderColor = UIColor.gray.cgColor
+        sender.layer.borderWidth = 2.5
+        colorButton = sender
     }
     
     
