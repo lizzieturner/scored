@@ -200,8 +200,7 @@
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="cancelNewPlayer:" destination="W4I-QV-0gr" eventType="touchUpInside" id="pOz-Ib-Scn"/>
-                                    <action selector="stoptTimerPressed:" destination="Zzm-Am-A98" eventType="touchUpInside" id="w5R-hA-71j"/>
+                                    <action selector="stopTimerPressed:" destination="Zzm-Am-A98" eventType="touchUpInside" id="j5I-0s-AJw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFh-Rh-H0F">
@@ -212,7 +211,6 @@
                                     <color key="titleColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="cancelNewPlayer:" destination="W4I-QV-0gr" eventType="touchUpInside" id="WfW-7E-xW5"/>
                                     <action selector="startTimerPressed:" destination="Zzm-Am-A98" eventType="touchUpInside" id="FuA-vl-baU"/>
                                 </connections>
                             </button>
@@ -239,7 +237,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" modalTransitionStyle="crossDissolve" id="Kma-D7-qzj"/>
+                                    <action selector="dismissViewController:" destination="Zzm-Am-A98" eventType="touchUpInside" id="x0d-Mx-Pim"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RN2-rk-K9k">
@@ -254,11 +252,16 @@
                                     <action selector="resetTimerPressed:" destination="Zzm-Am-A98" eventType="touchUpInside" id="2N2-gU-yZM"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="od8-gz-CHA">
+                                <rect key="frame" x="2" y="503" width="375" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="z13-27-aSw"/>
                     </view>
                     <connections>
+                        <outlet property="pickerView" destination="od8-gz-CHA" id="PyD-uE-9Dk"/>
                         <outlet property="timerLabel" destination="bHw-sz-gta" id="BvN-V3-Wlx"/>
                     </connections>
                 </viewController>
@@ -519,7 +522,4 @@
     <resources>
         <image name="Image" width="1600" height="1600"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Kma-D7-qzj"/>
-    </inferredMetricsTieBreakers>
 </document>

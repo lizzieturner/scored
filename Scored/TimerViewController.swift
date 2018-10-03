@@ -9,40 +9,89 @@
 import UIKit
 
 
-class TimerViewController: UIViewController {
+class TimerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
     
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var pickerView: UIPickerView!
     
     var countdownTimer: Timer!
+    var minutes: Int = 0
+    var seconds: Int = 0
     var totalTime = 10
    
- /*   var pickerDataSource = [["1", "2", "3", "4", "5"], ["1", "2", "3", "4", "5"]]
-   
-    @IBOutlet weak var pickerView: UIPickerView!
-*/
+    // MARK: picker functionality
+    
+//    var pickerDataSource = [["1 minute", "2 minutes", "3 minutes", "4", "5"], ["1 second", "2 seconds", "3 seconds", "4", "5"]]
+
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            self.minutes = row
+        case 1:
+            self.seconds = row
+        default:
+            print("No row")
+        }
+        
+        if let label = pickerView.view(forRow: row, forComponent: component) as? UILabel {
+            if component == 0 {
+                label.text = String(row) + " min"
+            }
+            else if component == 1 {
+                label.text = String(row) + " sec"
+            }
+        }
+        
+    
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return 11
+        }
+        return 61
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = UILabel()
+        label.text = String(row)
+        label.textAlignment = .center
+        return label
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-      /*  self.pickerView.dataSource = self
-        self.pickerView.delegate = self */
         
         // Do any additional setup after loading the view.
+        self.pickerView.dataSource = self
+        self.pickerView.delegate = self
     }
     
     // MARK: timer functionality
-    
-    
     func startTimer() {
+        if totalTime == 0 {
+            totalTime = self.minutes * 60 + self.seconds
+        }
+        timerLabel.text = "\(timeFormatted(totalTime))"
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
-    @objc func updateTime() {
-        timerLabel.text = "\(timeFormatted(totalTime))"
-        
-        if totalTime != 0 {
+    @objc func updateTime(timer: Timer) {
+        if totalTime > 0 {
             totalTime -= 1
         } else {
             stopTimer()
         }
+        
+        timerLabel.text = "\(timeFormatted(totalTime))"
     }
   
     func stopTimer() {
@@ -52,7 +101,8 @@ class TimerViewController: UIViewController {
     
     func resetTimer() {
         countdownTimer.invalidate()
-        countdownTimer = nil
+        totalTime = 0
+        timerLabel.text = "\(timeFormatted(totalTime))"
     }
     
     func timeFormatted(_ totalSeconds: Int) -> String {
@@ -66,7 +116,7 @@ class TimerViewController: UIViewController {
         startTimer()
     }
     
-    @IBAction func stoptTimerPressed(_ sender: UIButton) {
+    @IBAction func stopTimerPressed(_ sender: UIButton) {
         stopTimer()
     }
     
@@ -74,23 +124,10 @@ class TimerViewController: UIViewController {
         resetTimer()
     }
     
-    
-    // MARK: picker functionality
-
-/*
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return pickerDataSource.count
+    @IBAction func dismissViewController(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerDataSource.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerDataSource[component][row]
-    }
-    
-*/
     /*
     // MARK: - Navigation
 
