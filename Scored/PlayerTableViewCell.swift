@@ -22,6 +22,7 @@ class PlayerTableViewCell: UITableViewCell {
             nameLabel.text = player?.name
             scoreLabel.text = "\(player?.score ?? 0)"
             scoreStepper.value = Double(player?.score ?? 0)
+            self.contentView.backgroundColor = player?.color
         }
     }
     

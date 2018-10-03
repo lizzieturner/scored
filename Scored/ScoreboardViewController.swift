@@ -12,7 +12,8 @@ protocol ScoreboardDelegate {
     func add(_ player: Player)
 }
 
-class ScoreboardViewController: UIViewController {
+class ScoreboardViewController: UIViewController, NewPlayerDelegate {
+    
     private var delegate: ScoreboardDelegate?
 
     override func viewDidLoad() {
@@ -27,11 +28,18 @@ class ScoreboardViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "embedTableView" {
-            let gameTableViewController = segue.destination as! GameTableViewController
-            self.delegate = gameTableViewController
+            self.delegate = segue.destination as! GameTableViewController
+        } else if segue.identifier == "addNewPlayer" {
+            let newPlayerViewController = segue.destination as! NewPlayerViewController
+            newPlayerViewController.delegate = self
         }
     }
     
+    func didCreatePlayer(_ player: Player) {
+        self.delegate?.add(player)
+    }
+/*
+     // old add player functionality
     @IBAction func addNewPlayer(_ sender: Any) {
         let alert = UIAlertController(title: "Add New Player", message: "Enter player name.", preferredStyle: .alert)
         alert.addTextField { (playerNameTextField) in
@@ -48,6 +56,8 @@ class ScoreboardViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    */
+    
     
     /*
      // Override to support conditional editing of the table view.
