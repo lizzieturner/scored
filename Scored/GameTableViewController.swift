@@ -15,6 +15,7 @@ class GameTableViewController: UITableViewController, PlayerCellDelegate, Scoreb
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.alwaysBounceVertical = false
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

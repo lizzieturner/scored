@@ -20,7 +20,7 @@ class TimerViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     var countdownTimer: Timer!
     var minutes: Int = 0
     var seconds: Int = 0
-    var totalTime = 10
+    var totalTime = 0
    
     // MARK: picker functionality
     

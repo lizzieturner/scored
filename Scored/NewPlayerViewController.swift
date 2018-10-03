@@ -25,22 +25,15 @@ class NewPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        numberToolbar.barStyle = UIBarStyle.blackTranslucent
-        numberToolbar.items=[
-            UIBarButtonItem(title: "Apply", style: UIBarButtonItem.Style.done, target: self, action: #selector(NewPlayerViewController.dismissKeyboard))
-        ]
         
-        numberToolbar.sizeToFit()
-        
-        startingScore.inputAccessoryView = numberToolbar
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(NewPlayerViewController.dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
         
         playerName.becomeFirstResponder()
     }
     
    @IBAction func dismissKeyboard(_ sender: Any) {
-        startingScore.resignFirstResponder()
+        self.view.endEditing(true)
     }
     
     @IBAction func didBeginEditing(_ sender: UITextField) {
