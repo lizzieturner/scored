@@ -10,6 +10,7 @@ import UIKit
 
 class GameTableViewController: UITableViewController, PlayerCellDelegate, ScoreboardDelegate {
     var gameProvider: GameProvider?
+    var updateScoreTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,8 +53,14 @@ class GameTableViewController: UITableViewController, PlayerCellDelegate, Scoreb
     // MARK: - PlayerCellDelegate
     
     func didUpdateScore() {
-        gameProvider?.game?.players.sort() {$0.score > $1.score }
-        tableView.reloadData()
+        if let timer = updateScoreTimer {
+            timer.invalidate()
+        }
+        updateScoreTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false, block: { _ in
+            self.gameProvider?.game?.players.sort() {$0.score > $1.score }
+            self.tableView.reloadData()
+        })
+        self.tableView.reloadData()
     }
     
     // MARK: - ScoreboardDelegate
@@ -62,13 +69,10 @@ class GameTableViewController: UITableViewController, PlayerCellDelegate, Scoreb
         tableView.reloadData()
     }
     
+    // Swipe right to delete player cell
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == .delete {
-            
-            // remove the item from the data model
             gameProvider?.game?.players.remove(at: indexPath.row)
-            // delete the table view row
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

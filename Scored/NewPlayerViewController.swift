@@ -56,7 +56,7 @@ class NewPlayerViewController: UIViewController {
             button.layer.borderWidth = 0
         }
         
-        sender.layer.borderColor = UIColor.gray.cgColor
+        sender.layer.borderColor = UIColor.black.cgColor
         sender.layer.borderWidth = 2.5
         colorButton = sender
     }

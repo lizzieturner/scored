@@ -26,8 +26,8 @@ class ScoreboardViewController: UIViewController, NewPlayerDelegate, GameProvide
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.gameNameTextField.text = game?.name
-        self.gameIDTextField.text = game?.id
+        self.gameNameTextField.text = game?.name ?? "New Game"
+        self.gameIDTextField.text = game?.id ?? "Game ID"
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,6 +52,7 @@ class ScoreboardViewController: UIViewController, NewPlayerDelegate, GameProvide
         delegate?.updateGame()
     }
     
+    // MARK: bottom toolbar functions
     
     @IBAction func resetScores(_ sender: Any) {
         for player in (game?.players)! {
@@ -60,7 +61,19 @@ class ScoreboardViewController: UIViewController, NewPlayerDelegate, GameProvide
         delegate?.updateGame()
     }
     
-/*
+    @IBAction func rollDie(_ sender: Any) {
+        let randomNumber = Int.random(in: 1 ... 6)
+        let dieMsg = "You rolled a \(randomNumber)!"
+        let alert = UIAlertController(title: dieMsg, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Roll Again", style: .default, handler: { action in
+            self.rollDie(self)
+        }))
+        alert.addAction(UIAlertAction(title: "Go Back", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
+    
+    /*
      // old add player functionality
     @IBAction func addNewPlayer(_ sender: Any) {
         let alert = UIAlertController(title: "Add New Player", message: "Enter player name.", preferredStyle: .alert)
