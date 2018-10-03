@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+class Player {
+    var name: String
+    var score: Int32 = 0
+    
+    init(name: String) {
+        self.name = name
+    }
+}

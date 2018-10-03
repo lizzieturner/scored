@@ -8,13 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LaunchScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-
+    @IBAction func createNewGame(_ sender: Any) {
+        print("create pressed")
+    }
+    
+    @IBAction func loadExistingGame(_ sender: Any) {
+        print("load pressed")
+    }
 }
 

@@ -8,8 +8,25 @@
 
 import UIKit
 
-class PlayerTableViewCell: UITableViewCell {
+protocol PlayerCellDelegate {
+    func didUpdateScore()
+}
 
+class PlayerTableViewCell: UITableViewCell {
+    @IBOutlet weak var scoreStepper: UIStepper!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    var player: Player? {
+        didSet {
+            nameLabel.text = player?.name
+            scoreLabel.text = "\(player?.score ?? 0)"
+            scoreStepper.value = Double(player?.score ?? 0)
+        }
+    }
+    
+    var delegate: PlayerCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +38,8 @@ class PlayerTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func updateScore(_ sender: UIStepper) {
+        player?.score = Int32(sender.value)
+        delegate?.didUpdateScore()
+    }
 }

@@ -8,22 +8,11 @@
 
 import UIKit
 
-class GameTableViewController: UITableViewController {
-
-    // make array of players
-    var players = [Player]()
-   
-    // make sample player that autoloads
-    private func loadSamplePlayer() {
-        let samplePlayer = Player(name: "Player Name")
-        players += [samplePlayer]
-    }
+class GameTableViewController: UITableViewController, ScoreboardDelegate, PlayerCellDelegate {
+    private var players = [Player]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // load sample player
-        loadSamplePlayer()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -54,15 +43,24 @@ class GameTableViewController: UITableViewController {
         }
 
         // fetches appropriate player for cell
-        let player = players[indexPath.row]
-        
-        // configure the cell
-        cell.nameLabel.text = player.name
-        cell.scoreLabel.text = "\(player.score)"
+        cell.player = players[indexPath.row]
+        cell.delegate = self
         
         return cell
     }
 
+    // MARK: - ScoreboadDelegate
+    func add(_ player: Player) {
+        players.append(player)
+        tableView.reloadData()
+    }
+    
+    // MARK: - PlayerCellDelegate
+    
+    func didUpdateScore() {
+        players.sort() {$0.score > $1.score }
+        tableView.reloadData()
+    }
 
     /*
     // Override to support conditional editing of the table view.
