@@ -57,7 +57,7 @@ class NewPlayerViewController: UIViewController {
     
     @IBAction func saveNewPlayer(_ sender: Any) {
         delegate?.didCreatePlayer(Player(name: playerName.text!,
-                                         score: Int32(startingScore.text!)!,
+                                         score: Int32(startingScore.text!)! ,
                                          color: playerColor))
         dismiss(animated: true, completion: nil)
     }

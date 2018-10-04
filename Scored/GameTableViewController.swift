@@ -47,8 +47,13 @@ class GameTableViewController: UITableViewController, PlayerCellDelegate, Scoreb
         // fetches appropriate player for cell
         cell.player = gameProvider?.game?.players[indexPath.row]
         cell.delegate = self
-        
         return cell
+    }
+    
+    // updates score order and reloads game data
+    func refreshLeaderboard() {
+        self.gameProvider?.game?.players.sort() {$0.score > $1.score }
+        self.tableView.reloadData()
     }
     
     // MARK: - PlayerCellDelegate
@@ -58,8 +63,7 @@ class GameTableViewController: UITableViewController, PlayerCellDelegate, Scoreb
             timer.invalidate()
         }
         updateScoreTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false, block: { _ in
-            self.gameProvider?.game?.players.sort() {$0.score > $1.score }
-            self.tableView.reloadData()
+            self.refreshLeaderboard()
         })
         self.tableView.reloadData()
     }
@@ -67,7 +71,7 @@ class GameTableViewController: UITableViewController, PlayerCellDelegate, Scoreb
     // MARK: - ScoreboardDelegate
     
     func updateGame() {
-        tableView.reloadData()
+        refreshLeaderboard()
     }
     
     // Swipe right to delete player cell
