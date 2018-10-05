@@ -73,11 +73,30 @@ class ScoreboardViewController: UIViewController, NewPlayerDelegate, GameProvide
         alert.addAction(UIAlertAction(title: "Go Back", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
+    @IBAction func setWinCondition(_ sender: Any) {
+        let alert = UIAlertController(title: "Set Win Condition", message: "Enter the winning score below", preferredStyle: .alert)
+        alert.addTextField { (winConditionTextField) in
+            winConditionTextField.placeholder = "Win Condition"
+            winConditionTextField.keyboardType = UIKeyboardType.numberPad
+        }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: Dismiss keyboards after tapping away
     @IBAction func dismissKeyboard(_ sender: Any) {
         self.view.endEditing(true)
     }
+
+    // MARK: shake to roll die
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            self.rollDie(self)
+        }
+    }
+    
+}
     
     /*
      // old add player functionality
@@ -145,4 +164,3 @@ class ScoreboardViewController: UIViewController, NewPlayerDelegate, GameProvide
      }
      */
 
-}

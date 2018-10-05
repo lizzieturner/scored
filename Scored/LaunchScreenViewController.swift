@@ -16,6 +16,9 @@ class LaunchScreenViewController: UIViewController {
 
     @IBOutlet weak var switchController: UISwitch!
     var delegate: LaunchScreenDelegate?
+    @IBOutlet var myButtons: [UIButton]!
+    @IBOutlet var myLabels: [UILabel]!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,19 +69,25 @@ class LaunchScreenViewController: UIViewController {
     // TODO: finish implementing dark mode toggle
         @IBAction func toggleDarkMode(_ sender: UISwitch) {
             if switchController.isOn == true {
-                print("dark")
-                UserDefaults.standard.set(true, forKey: "isDarkMode")
-                let button = UIButton()
+              /*  UserDefaults.standard.set(true, forKey: "isDarkMode") */
                 view.backgroundColor = UIColor.black
-                UILabel.appearance().textColor = UIColor.white
-                button.setTitleColor(UIColor.white, for: .normal)
+                for button in self.myButtons {
+                    button.titleLabel?.textColor = UIColor.white
+                }
+                for label in self.myLabels {
+                    label.textColor = UIColor.white
+                }
                 
             }
             else {
-                print("light")
-                UserDefaults.standard.set(false, forKey: "isDarkMode")
+              /*  UserDefaults.standard.set(false, forKey: "isDarkMode") */
                 view.backgroundColor = UIColor.white
-                UILabel.appearance().textColor = UIColor.black
+                for button in self.myButtons {
+                    button.titleLabel?.textColor = UIColor.black
+                }
+                for label in self.myLabels {
+                    label.textColor = UIColor.black
+                }
             }
         }
 

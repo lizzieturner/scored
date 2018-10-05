@@ -114,6 +114,9 @@
                                 <state key="normal" title="☆">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="setWinCondition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lEQ-5y-pWc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -515,11 +518,17 @@
                     </view>
                     <connections>
                         <outlet property="switchController" destination="FrB-kf-QG4" id="BDT-2c-OuO"/>
+                        <outletCollection property="myButtons" destination="yI3-ya-gjA" collectionClass="NSMutableArray" id="jCW-xb-Mah"/>
+                        <outletCollection property="myButtons" destination="KIq-l4-kSj" collectionClass="NSMutableArray" id="ynE-sT-ONB"/>
+                        <outletCollection property="myLabels" destination="A6W-DN-x3C" collectionClass="NSMutableArray" id="uHK-2H-Nma"/>
+                        <outletCollection property="myLabels" destination="A6W-DN-x3C" collectionClass="NSMutableArray" id="VYE-9P-Lm2"/>
+                        <outletCollection property="myLabels" destination="zjb-zz-4PU" collectionClass="NSMutableArray" id="WjN-Rv-nAS"/>
+                        <outletCollection property="myLabels" destination="PVU-aZ-pRk" collectionClass="NSMutableArray" id="hUq-FA-JNG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Llm-G2-uJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-694" y="81"/>
+            <point key="canvasLocation" x="-695.20000000000005" y="80.541871921182263"/>
         </scene>
     </scenes>
     <resources>
