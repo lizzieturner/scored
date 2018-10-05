@@ -26,6 +26,8 @@ class ScoreboardViewController: UIViewController, NewPlayerDelegate, GameProvide
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let _: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ScoreboardViewController.dismissKeyboard))
+        
         self.gameNameTextField.text = game?.name ?? "New Game"
         self.gameIDTextField.text = game?.id ?? "Game ID"
         
@@ -72,6 +74,10 @@ class ScoreboardViewController: UIViewController, NewPlayerDelegate, GameProvide
         present(alert, animated: true, completion: nil)
     }
 
+    // MARK: Dismiss keyboards after tapping away
+    @IBAction func dismissKeyboard(_ sender: Any) {
+        self.view.endEditing(true)
+    }
     
     /*
      // old add player functionality

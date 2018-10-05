@@ -14,12 +14,26 @@ protocol LaunchScreenDelegate {
 
 class LaunchScreenViewController: UIViewController {
 
+    @IBOutlet weak var switchController: UISwitch!
     var delegate: LaunchScreenDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+/*        // MARK: Dark Mode Settings
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")  // Retrieve the state
+        
+        if isDarkMode == true {
+            view.backgroundColor = UIColor.black
+            UILabel.appearance().textColor = UIColor.white
+            button.setTitleColor(UIColor.white, for: .normal)
+        }
+        else {
+            view.backgroundColor = UIColor.white
+            UILabel.appearance().textColor = UIColor.black
+        } */
     }
     
     @IBAction func createNewGame(_ sender: Any) {
@@ -50,8 +64,24 @@ class LaunchScreenViewController: UIViewController {
     }
     
     // TODO: finish implementing dark mode toggle
-        @IBAction func toggleDarkMode(_ sender: Any) {
-    }
+        @IBAction func toggleDarkMode(_ sender: UISwitch) {
+            if switchController.isOn == true {
+                print("dark")
+                UserDefaults.standard.set(true, forKey: "isDarkMode")
+                let button = UIButton()
+                view.backgroundColor = UIColor.black
+                UILabel.appearance().textColor = UIColor.white
+                button.setTitleColor(UIColor.white, for: .normal)
+                
+            }
+            else {
+                print("light")
+                UserDefaults.standard.set(false, forKey: "isDarkMode")
+                view.backgroundColor = UIColor.white
+                UILabel.appearance().textColor = UIColor.black
+            }
+        }
+
     
     /*
     // MARK: - Navigation
@@ -62,5 +92,5 @@ class LaunchScreenViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+
